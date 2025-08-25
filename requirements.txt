@@ -1,0 +1,10 @@
+Flask==2.3.3
+tensorflow>=2.16.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+numpy>=1.24.0
+Werkzeug==2.3.7
+reportlab>=4.0.0
+scikit-learn>=1.0.0
+matplotlib>=3.5.0
+seaborn>=0.11.0 

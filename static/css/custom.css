@@ -1,0 +1,400 @@
+/* Custom CSS for Enhanced Brain Tumor Detection UI */
+
+/* Additional Animations */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.8), 0 0 30px rgba(102, 126, 234, 0.6);
+    }
+}
+
+/* Enhanced Card Animations */
+.card {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.card:nth-child(odd) {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.card:nth-child(even) {
+    animation: slideInFromRight 0.8s ease-out;
+}
+
+/* Glowing Effects */
+.btn-primary:hover {
+    animation: glow 2s infinite;
+}
+
+/* Enhanced Form Styling */
+.form-control:focus {
+    animation: glow 2s infinite;
+}
+
+/* Custom Alert Styling */
+.alert {
+    border: none;
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    animation: slideInFromLeft 0.5s ease-out;
+}
+
+.alert-success {
+    background: rgba(0, 184, 148, 0.2);
+    border-left: 4px solid #00b894;
+}
+
+.alert-danger {
+    background: rgba(255, 107, 107, 0.2);
+    border-left: 4px solid #ff6b6b;
+}
+
+.alert-warning {
+    background: rgba(253, 203, 110, 0.2);
+    border-left: 4px solid #fdcb6e;
+}
+
+.alert-info {
+    background: rgba(120, 219, 255, 0.2);
+    border-left: 4px solid #78dbff;
+}
+
+/* Enhanced Loading Animation */
+.loading-animation {
+    position: relative;
+}
+
+.loading-animation::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+    border: 3px solid rgba(102, 126, 234, 0.1);
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Enhanced Image Preview */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.image-container:hover::before {
+    left: 100%;
+}
+
+/* Enhanced Detail Cards */
+.detail-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.detail-card:hover::before {
+    transform: translateX(100%);
+}
+
+/* Enhanced Upload Zone */
+.upload-zone {
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.upload-zone:hover::before {
+    transform: translateX(100%);
+}
+
+/* Enhanced Feature Cards */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.feature-card:hover::before {
+    transform: translateX(100%);
+}
+
+/* Enhanced Navigation */
+.navbar-brand {
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar-brand::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.navbar-brand:hover::before {
+    left: 100%;
+}
+
+/* Enhanced Results Display */
+#result h3 {
+    position: relative;
+    overflow: hidden;
+}
+
+#result h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+#result h3:hover::before {
+    left: 100%;
+}
+
+/* Enhanced Progress Bar */
+.progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Enhanced Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient);
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+/* Enhanced Focus States */
+.form-control:focus,
+.btn:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+/* Enhanced Button States */
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Enhanced Typography */
+.display-4 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.lead {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+    
+    .upload-zone {
+        padding: 2rem 1rem;
+    }
+    
+    .detail-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .detail-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Enhanced Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Enhanced Print Styles */
+@media print {
+    .navbar,
+    .btn,
+    .upload-zone,
+    .loader {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* Enhanced Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark-bg: #0a0a0a;
+        --card-bg: #1a1a1a;
+    }
+}
+
+/* Enhanced High Contrast Mode */
+@media (prefers-contrast: high) {
+    .form-control {
+        border-width: 3px;
+    }
+    
+    .btn {
+        border-width: 2px;
+    }
+    
+    .card {
+        border-width: 2px;
+    }
+} 

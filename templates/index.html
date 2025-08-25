@@ -1,0 +1,489 @@
+{% extends "import.html" %} 
+{% block content %}
+
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <div class="hero-section">
+                <h1 class="display-4 font-weight-bold mb-3" style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    <i class="fas fa-brain mr-3 floating"></i>
+                    Brain Tumor Detection & Analysis
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Advanced AI-powered medical imaging analysis for accurate brain tumor detection and comprehensive report generation
+                </p>
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="feature-card text-center p-3">
+                            <i class="fas fa-robot fa-2x mb-2" style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                            <h6>AI-Powered</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="feature-card text-center p-3">
+                            <i class="fas fa-chart-line fa-2x mb-2" style="background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                            <h6>High Accuracy</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="feature-card text-center p-3">
+                            <i class="fas fa-file-pdf fa-2x mb-2" style="background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                            <h6>PDF Reports</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="feature-card text-center p-3">
+                            <i class="fas fa-shield-alt fa-2x mb-2" style="background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                            <h6>Secure</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <!-- Patient Information Form -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4><i class="fas fa-user-md mr-2"></i>Patient Information</h4>
+                </div>
+                <div class="card-body">
+                    <form id="patient-form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="patient_name">
+                                        <i class="fas fa-user mr-1"></i>Full Name:
+                                    </label>
+                                    <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter patient's full name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="patient_age">
+                                        <i class="fas fa-birthday-cake mr-1"></i>Age:
+                                    </label>
+                                    <input type="number" class="form-control" id="patient_age" name="patient_age" min="1" max="120" placeholder="Enter age" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="patient_sex">
+                                        <i class="fas fa-venus-mars mr-1"></i>Sex:
+                                    </label>
+                                    <select class="form-control" id="patient_sex" name="patient_sex" required>
+                                        <option value="">Select gender...</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Image Upload Section -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4><i class="fas fa-upload mr-2"></i>MRI Image Upload</h4>
+                </div>
+                <div class="card-body">
+                    <form id="upload-file" method="post" enctype="multipart/form-data">
+                        <div class="upload-area">
+                            <div class="form-group text-center">
+                                <div class="upload-zone" id="upload-zone">
+                                    <i class="fas fa-cloud-upload-alt fa-3x mb-3" style="color: var(--text-muted);"></i>
+                                    <h5>Drag & Drop MRI Image Here</h5>
+                                    <p class="text-muted">or click to browse files</p>
+                                    <input type="file" name="file" class="form-control-file" id="imageUpload" accept=".png, .jpg, .jpeg" required style="display: none;">
+                                    <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imageUpload').click()">
+                                        <i class="fas fa-folder-open mr-2"></i>Choose File
+                                    </button>
+                                </div>
+                                <div id="file-info" class="mt-3" style="display: none;">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-file-image mr-2"></i>
+                                        <span id="file-name"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Image Preview Section -->
+            <div class="image-section" style="display:none;">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4><i class="fas fa-eye mr-2"></i>Image Preview</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="image-container">
+                            <img id="imagePreview" class="img-fluid" src="#" style="max-width:400px;max-height:400px;"/>
+                        </div>
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary btn-lg" id="btn-predict">
+                                <i class="fas fa-search mr-2"></i>Analyze MRI Image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Section -->
+            <div class="loader" style="display:none;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="loading-animation">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Analyzing...</span>
+                            </div>
+                            <h5 class="mt-3">Analyzing MRI Image...</h5>
+                            <p class="text-muted">Our AI is processing your image for accurate tumor detection</p>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" style="display:none;">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4><i class="fas fa-chart-bar mr-2"></i>Analysis Results</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="result" class="text-center mb-4">
+                            <span></span>
+                        </div>
+                        
+                        <!-- Tumor Details (if tumor detected) -->
+                        <div id="tumor-details" style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="detail-card">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-ruler"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <h6>Size</h6>
+                                            <p id="tumor-size" class="detail-value"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-card">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <h6>Danger Level</h6>
+                                            <p id="danger-level" class="detail-value"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-card">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <h6>Estimated Life Span</h6>
+                                            <p id="life-span" class="detail-value"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-card">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <h6>Treatment Timeframe</h6>
+                                            <p id="treatment-timeframe" class="detail-value"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Download Report Button -->
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-success btn-lg" id="btn-download-report">
+                                <i class="fas fa-download mr-2"></i>Download Medical Report (PDF)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero-section {
+        padding: 3rem 0;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .upload-area {
+        padding: 2rem;
+    }
+
+    .upload-zone {
+        border: 3px dashed rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 3rem;
+        transition: var(--transition);
+        cursor: pointer;
+    }
+
+    .upload-zone:hover {
+        border-color: #667eea;
+        background: rgba(102, 126, 234, 0.1);
+    }
+
+    .upload-zone.dragover {
+        border-color: #667eea;
+        background: rgba(102, 126, 234, 0.2);
+        transform: scale(1.02);
+    }
+
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .detail-card {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid #667eea;
+    }
+
+    .detail-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+
+    .detail-icon i {
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .detail-content h6 {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .detail-value {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .loading-animation {
+        padding: 2rem;
+    }
+
+    .progress {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+
+    .progress-bar {
+        background: var(--primary-gradient);
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+$(document).ready(function() {
+    // Drag and drop functionality
+    const uploadZone = document.getElementById('upload-zone');
+    const fileInput = document.getElementById('imageUpload');
+
+    uploadZone.addEventListener('click', () => fileInput.click());
+
+    uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('dragover');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            handleFileSelect(files[0]);
+        }
+    });
+
+    // File selection
+    $("#imageUpload").change(function() {
+        const file = this.files[0];
+        if (file) {
+            handleFileSelect(file);
+        }
+    });
+
+    function handleFileSelect(file) {
+        // Show file info
+        $("#file-name").text(file.name);
+        $("#file-info").show();
+        
+        // Preview image
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            $("#imagePreview").attr("src", e.target.result);
+            $(".image-section").show();
+            $("#results-section").hide();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Prediction button click
+    $("#btn-predict").click(function() {
+        // Validate patient form
+        if (!$("#patient_name").val() || !$("#patient_age").val() || !$("#patient_sex").val()) {
+            showAlert("Please fill in all patient information fields.", "warning");
+            return;
+        }
+
+        // Validate file upload
+        if (!$("#imageUpload")[0].files[0]) {
+            showAlert("Please select an MRI image to analyze.", "warning");
+            return;
+        }
+
+        // Show loader
+        $(".loader").show();
+        $(".image-section").hide();
+        $("#results-section").hide();
+
+        // Create FormData with patient info and file
+        const formData = new FormData();
+        formData.append('file', $("#imageUpload")[0].files[0]);
+        formData.append('patient_name', $("#patient_name").val());
+        formData.append('patient_age', $("#patient_age").val());
+        formData.append('patient_sex', $("#patient_sex").val());
+
+        // Make AJAX request
+        $.ajax({
+            url: '/predict',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $(".loader").hide();
+                
+                if (response.error) {
+                    showAlert("Error: " + response.error, "danger");
+                    $(".image-section").show();
+                    return;
+                }
+
+                // Display results
+                let resultText = response.prediction;
+                let resultClass = "text-success";
+                let resultIcon = '<i class="fas fa-check-circle mr-2"></i>';
+                
+                if (response.prediction.includes("Yes")) {
+                    resultClass = "text-danger";
+                    resultIcon = '<i class="fas fa-exclamation-triangle mr-2"></i>';
+                    resultText += " - URGENT MEDICAL ATTENTION REQUIRED";
+                }
+
+                $("#result span").html(`<h3 class="${resultClass}">${resultIcon}${resultText}</h3>`);
+
+                // Show tumor details if detected
+                if (response.tumor_data) {
+                    $("#tumor-size").text(response.tumor_data.size + " cm");
+                    $("#danger-level").text(response.tumor_data.is_dangerous ? "HIGH" : "LOW");
+                    $("#life-span").text(response.tumor_data.life_span + " years");
+                    $("#treatment-timeframe").text(response.tumor_data.treatment_timeframe);
+                    $("#tumor-details").show();
+                } else {
+                    $("#tumor-details").hide();
+                }
+
+                // Store PDF filename for download
+                $("#btn-download-report").data('pdf-filename', response.pdf_filename);
+                
+                $("#results-section").show();
+            },
+            error: function() {
+                $(".loader").hide();
+                $(".image-section").show();
+                showAlert("An error occurred during analysis. Please try again.", "danger");
+            }
+        });
+    });
+
+    // Download report button click
+    $("#btn-download-report").click(function() {
+        const pdfFilename = $(this).data('pdf-filename');
+        if (pdfFilename) {
+            window.open(`/download/${pdfFilename}`, '_blank');
+        } else {
+            showAlert("No report available for download.", "warning");
+        }
+    });
+
+    function showAlert(message, type) {
+        const alertHtml = `
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                <i class="fas fa-${type === 'danger' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} mr-2"></i>
+                ${message}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+        `;
+        $('.container').prepend(alertHtml);
+        
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => {
+            $('.alert').fadeOut();
+        }, 5000);
+    }
+});
+</script>
+
+{% endblock %}
